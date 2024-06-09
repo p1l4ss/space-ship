@@ -1,0 +1,35 @@
+{
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.4.1",
+    "pug": "^3.0.2"
+  },
+  "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.4",
+    "@tabler/icons-webfont": "^3.1.0",
+    "rollup": "^4.13.2"
+  },
+  "scripts": {
+    "dev": "node dev",
+    "build-js": "rollup -w -c -f iife client/index.js -o public/main.js",
+    "copy-tabler-icons-css": "rsync -av node_modules/@tabler/icons-webfont/tabler-icons.min.css public/tabler/",
+    "copy-tabler-icons-fonts": "rsync -av node_modules/@tabler/icons-webfont/fonts/ public/tabler/fonts/"
+  },
+  "name": "flanets",
+  "version": "1.0.0",
+  "main": ".rollup.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pakastin/flanets.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pakastin/flanets/issues"
+  },
+  "homepage": "https://github.com/pakastin/flanets#readme",
+  "description": ""
+}
