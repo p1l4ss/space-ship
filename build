@@ -1,4 +1,0 @@
-docker context use pakastin
-docker build --tag ghcr.io/pakastin/flanets .
-docker push ghcr.io/pakastin/flanets
-docker service update --image ghcr.io/pakastin/flanets pakastin_flanets
