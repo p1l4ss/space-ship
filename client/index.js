@@ -17,6 +17,8 @@ const DAY = 86400;
 const BASE_FPS = 60;
 const SHIP_UPDATE_FPS = BASE_FPS;
 
+
+
 const $scene = document.querySelector('#scene');
 const $canvas = document.querySelector('#canvas');
 const $speed = document.querySelector('#speed');
@@ -358,17 +360,19 @@ function updateShip (deltaTime, once) {
       }
       if (SCALE < INIT_SCALE) {
         const diff = Date.now() - startTime;
-        if (diff < 1000) {
+        if (diff < 2000) {
           $intro.textContent = '';
-        } else if (diff < 3000) {
-          $intro.textContent = `Welcome to Flanets, ${username}!`;
-        } else if (diff < 5500) {
+        } if (diff < 3500) {
+          $intro.textContent = 'Welcome to Flanets!' ;
+      }
+      
+         else if (diff < 5500) {
           $intro.textContent = 'Fly around in your space ship with realistic gravity';
         } else if (diff < 8000) {
           $intro.textContent = 'and planets where they actually are right now in our galaxy';
         } else if (diff < 10000) {
           $intro.textContent = 'Open source at https://github.com/p1l4ss/space-ship';
-        } 
+        }  
         else {
           $intro.textContent = 'Have fun!';
         }

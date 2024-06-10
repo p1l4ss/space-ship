@@ -128,8 +128,14 @@ app.post('/login', async (req, res) => {
 });
 
 app.get('/game', authenticateToken, (req, res) => {
-  res.render('game');
+  const users = readUsers();
+  const user = users.find(u => u.email === req.user.id);
+  const username = user ? user.username : 'Guest';
+  console.log(username)
+  res.render('game',{username});
+
 });
+
 
 // Start server
 app.listen(PORT, (err) => {
