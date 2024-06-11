@@ -4,7 +4,7 @@ html
     meta(charset="utf-8")
     title Space-ships
     meta(name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover")
-    meta(name="mobile-web-app-capable" content="yes") 
+    meta(name="mobile-web-app-capable" content="yes")
     meta(property="og:url" content="https://flanets.io")
     meta(property="og:title" content="Flanets")
     meta(property="og:description" content="Free and open source 2D space flight simulator")
@@ -27,6 +27,20 @@ html
     link(rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png")
     link(rel="manifest" href="manifest.json")
     meta(name="theme-color" content="#000000")
+    style.
+      .button.profile.grey.disabled {
+        padding: 20px;
+        font-size: 16px;
+        width: 150px; /* Adjust width as needed */
+        height: 50px; /* Adjust height as needed */
+      }
+      .button.profile.grey.disabled .ti {
+        font-size: 24px; /* Adjust icon size as needed */
+      }
+       .button.profile.grey.disabled .username {
+        font-size: 12px; /* Adjust font size as needed */
+        margin-top: 5px; /* Adjust spacing as needed */
+      }
   body
     canvas#canvas
     #scene
@@ -35,11 +49,13 @@ html
         #shipimg
     #logo
       img(src="logo_white.svg")
-
+      .row
+        .button.profile.grey.disabled
+          .ti.ti-user
+          span.username= username
     #speed
     #keys
     #intro
-
     #throttle
       .bar
       .amount 100 %
