@@ -30,11 +30,15 @@ const $keys = document.querySelector('#keys');
 
 $keys.textContent = 'up = throttle, left/right = turn, 1–9 speed of simulation, +/- = zoom';
 
-const $profile = document.querySelector('.button.profile');
+const $profile = document.querySelector('.ti.ti-user');
 $profile.onclick = () => {
   window.location.href = '/profile';
 };
 
+const $logout = document.querySelector('.ti.ti-logout');
+$logout.onclick = () => {
+  window.location.href = '/';
+};
 
 let FOCUS = 0;
 let lastSOIChange = 0;
