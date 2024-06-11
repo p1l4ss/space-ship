@@ -17,8 +17,6 @@ const DAY = 86400;
 const BASE_FPS = 60;
 const SHIP_UPDATE_FPS = BASE_FPS;
 
-
-
 const $scene = document.querySelector('#scene');
 const $canvas = document.querySelector('#canvas');
 const $speed = document.querySelector('#speed');
@@ -360,6 +358,7 @@ function updateShip (deltaTime, once) {
       }
       if (SCALE < INIT_SCALE) {
         const diff = Date.now() - startTime;
+
         if (diff < 2000) {
           $intro.textContent = '';
         } if (diff < 3500) {

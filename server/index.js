@@ -6,24 +6,19 @@ const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
-
-JWT_SECRET  = "secret";
-const PORT =  8080;
-const USERS_FILE = path.join(__dirname, '../users.json');
+const JWT_SECRET = "secret";
+const PORT = 8080;
+const USERS_FILE = path.join(__dirname, 'users.json');
 
 const app = express();
-
-
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); 
 app.use(express.static('public'));
 app.use(cookieParser());
 
-
 app.set('view engine', 'pug');
 app.set('views', 'client');
-
 
 const readUsers = () => {
   try {
@@ -42,7 +37,6 @@ const writeUsers = (users) => {
     console.error('Error writing to users file:', err);
   }
 };
-
 
 const authenticateToken = (req, res, next) => {
   const token = req.cookies.jwt;
@@ -97,8 +91,6 @@ app.post('/register', async (req, res) => {
   }
 });
 
-
-
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
@@ -136,6 +128,59 @@ app.get('/game', authenticateToken, (req, res) => {
 
 });
 
+// Profile Routes
+app.get('/profile', authenticateToken, (req, res) => {
+  const users = readUsers();
+  const user = users.find(user => user.email === req.user.id);
+  if (!user) {
+    return res.status(404).json({ error: 'User not found' });
+  }
+  res.render('profile', { user });
+});
+
+app.get('/profile/edit', authenticateToken, (req, res) => {
+  const users = readUsers();
+  const user = users.find(user => user.email === req.user.id);
+  if (!user) {
+    return res.status(404).json({ error: 'User not found' });
+  }
+  res.render('edit-profile', { user });
+});
+
+app.post('/profile/edit', authenticateToken, async (req, res) => {
+  const { username, email, password } = req.body;
+
+  if (!username || !email) {
+    return res.status(400).json({ error: 'Username and email are required' });
+  }
+
+  try {
+    const users = readUsers();
+    const userIndex = users.findIndex(user => user.email === req.user.id);
+    if (userIndex === -1) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    const updatedUser = { ...users[userIndex], username, email };
+
+    if (password) {
+      updatedUser.password = await bcrypt.hash(password, 10);
+    }
+
+    users[userIndex] = updatedUser;
+    writeUsers(users);
+
+    res.redirect('/profile');
+  } catch (err) {
+    console.error('Profile update error:', err);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+app.get('/logout', (req, res) => {
+  res.clearCookie('jwt');
+  res.redirect('/');
+});
 
 // Start server
 app.listen(PORT, (err) => {

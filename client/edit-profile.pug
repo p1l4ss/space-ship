@@ -1,0 +1,84 @@
+doctype html
+html
+  head
+    title Flanets Game - Edit Profile
+    style.
+      body {
+          background-image: url('https://wallpapers.com/images/high/4k-black-hole-glowing-blue-lmc4hwbnhn0671f6.webp');
+          background-size: cover;
+          color: #fff;
+          font-family: 'Roboto', sans-serif;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          margin: 0;
+      }
+      .form-container {
+          width: 300px;
+          padding: 20px;
+          border: 2px solid #1c1c1c;
+          background-color: #333;
+          border-radius: 10px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      }
+      input[type="text"],
+      input[type="email"],
+      input[type="password"],
+      button {
+          width: calc(100% - 20px); /* Adjusted width to account for padding */
+          padding: 10px;
+          margin-bottom: 10px;
+          border: none;
+          border-radius: 5px;
+          background-color: #1c1c1c;
+          color: #fff;
+          font-size: 16px;
+          outline: none;
+          box-sizing: border-box; /* Ensure padding and border are included in the element's total width */
+      }
+      input[type="text"],
+      input[type="email"],
+      input[type="password"] {
+          background-color: #1c1c1c;
+          color: #fff;
+          font-size: 16px;
+          outline: none;
+      }
+      button {
+          background-color: #007bff;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+          font-weight: bold;
+      }
+      button:hover {
+          background-color: #0056b3;
+      }
+      h1 {
+          font-family: 'Orbitron', sans-serif;
+          font-size: 24px;
+          margin-bottom: 20px;
+      }
+      a {
+          display: inline-block;
+          margin-top: 10px;
+          padding: 10px 20px;
+          background-color: #007bff;
+          color: #fff;
+          text-decoration: none;
+          border-radius: 5px;
+          transition: background-color 0.3s ease;
+      }
+      a:hover {
+          background-color: #0056b3;
+      }
+
+  body
+    .form-container
+      h1(style="text-align: center;") Edit Profile
+      form(action="/profile/edit" method="post")
+        input(type="text", name="username", value=user.username, placeholder="Username", required)
+        input(type="email", name="email", value=user.email, placeholder="Email", required)
+        input(type="password", name="password", placeholder="Password (leave blank to keep current password)")
+        button(type="submit") Save Changes
+      a(href='/profile') Back to Profile

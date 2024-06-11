@@ -1,5 +1,5 @@
 #npm i
 
-#npm start
+#npm run dev
 
 #localhost:8080
